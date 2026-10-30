@@ -28,3 +28,14 @@
 .tabs button.active{background:#e7e6df;border-color:#899a8e}
 .route-content [id^=route-]{scroll-margin-top:100px}
 .specialist-cta{margin:48px auto 25px;padding:32px;text-align:center;border:1px solid #deded6;border-radius:18px;background:#f7f6f2}
+
+/* October 30: lighthouse photo remains fully visible, with all text outside image */
+.hero-intro{background:#faf7f2;text-align:center;padding:25px 20px 22px}
+.hero-intro h1{font:normal clamp(36px,4vw,56px)/1.1 Georgia,serif;margin:0 0 8px;color:#33352f}
+.hero-intro .subtitle{font:normal clamp(15px,1.5vw,19px)/1.45 Georgia,serif;color:#5c6057}
+.hero{background-image:url('assets/approved-lighthouse.jpg')!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center center!important;min-height:0!important;height:auto!important;aspect-ratio:2048/1366;max-height:none!important;background-color:#faf7f2!important;padding:0!important}
+.hero:before{display:none!important}
+.hero-note-below{padding:20px 20px 32px!important;gap:14px!important}
+.hero-note-below p{font-size:clamp(17px,1.8vw,22px)!important}
+.specialist-header-cta{background:#666c5d;color:white!important;border-radius:22px;padding:10px 16px;white-space:nowrap;font:13px/1.2 Arial,sans-serif;text-align:center}
+@media(max-width:900px){header{height:auto;min-height:66px;flex-wrap:wrap}.specialist-header-cta{margin-left:auto}.hero-intro{padding:20px 16px 15px}.hero{aspect-ratio:2048/1366!important;min-height:0!important;height:auto!important}}
