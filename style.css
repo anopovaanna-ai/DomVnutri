@@ -7,3 +7,13 @@
 /* Original high-resolution lighthouse, preserve proportions */
 .hero{background-image:linear-gradient(90deg,#0002,#0000),url('assets/lighthouse-original.jpg');background-size:cover;background-position:center center}
 @media(min-width:900px){.hero{min-height:510px}}
+
+/* Approved lighthouse: preserve image proportions and the original airy composition */
+.hero{background-image:url('assets/approved-lighthouse.jpg')!important;background-color:#f6f2ef!important;background-size:contain!important;background-position:center center!important;background-repeat:no-repeat!important;min-height:540px}
+.hero:before{background:linear-gradient(180deg,#faf7f4a0,transparent 50%,#f7f2edbb)!important}
+.practice-expansion{margin-top:16px;padding:12px 16px;border:1px solid #d8d0c5;border-radius:12px;background:#faf8f4}
+.practice-expansion summary{cursor:pointer;font-weight:650;color:#57564f;padding:5px 0}
+.practice-expansion p,.practice-expansion li{line-height:1.65}.practice-expansion li{margin-bottom:8px}
+.specialist-cta{margin:45px auto;padding:26px;max-width:900px;text-align:center;border:1px solid #d6cec4;border-radius:18px;background:#f8f5f0}
+.specialist-cta .btn{display:inline-block;margin-top:12px}
+@media(max-width:700px){.hero{min-height:360px;background-size:contain!important}}
