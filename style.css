@@ -17,3 +17,14 @@
 .specialist-cta{margin:45px auto;padding:26px;max-width:900px;text-align:center;border:1px solid #d6cec4;border-radius:18px;background:#f8f5f0}
 .specialist-cta .btn{display:inline-block;margin-top:12px}
 @media(max-width:700px){.hero{min-height:360px;background-size:contain!important}}
+
+/* Unified navigation and photo-safe home layout */
+.hero-note-below{position:relative!important;inset:auto!important;transform:none!important;max-width:920px;margin:0 auto;padding:34px 22px 42px;text-align:center;background:#f8f6f2;color:#323a37;display:flex;flex-direction:column;align-items:center;gap:18px}
+.hero-note-below p{color:#323a37!important;text-shadow:none!important;font-size:clamp(18px,2.1vw,26px);line-height:1.5;margin:0}
+.hero-note-below .btn{display:inline-flex;justify-content:center}
+.hero{min-height:390px;max-height:670px}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:18px 14px;background:#f7f5f1}
+.tabs button{cursor:pointer;border:1px solid #c7c5bd;background:#fff;border-radius:40px;padding:12px 18px;font:inherit;color:#34423e}
+.tabs button.active{background:#e7e6df;border-color:#899a8e}
+.route-content [id^=route-]{scroll-margin-top:100px}
+.specialist-cta{margin:48px auto 25px;padding:32px;text-align:center;border:1px solid #deded6;border-radius:18px;background:#f7f6f2}
