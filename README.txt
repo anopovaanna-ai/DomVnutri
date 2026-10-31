@@ -1,4 +1,1 @@
-Маршрут №6 «Мой ребёнок развивается иначе»
-Загрузите route-6.html в корень репозитория и все файлы из assets/ в папку assets/.
-Не заменяйте index.html или другие маршруты.
-Если шестая карточка главной страницы не ведёт на route-6.html, её ссылку следует исправить отдельно, без замены всей главной страницы.
+Upload index.html and route-6.html to repository root. Upload assets/route6-home-father-daughter-20261031.jpg to assets/. Keep all existing files, especially other route-6 assets. Do not delete files.
