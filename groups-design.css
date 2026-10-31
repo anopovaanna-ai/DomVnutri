@@ -5,3 +5,11 @@
 .program-section{max-width:920px;margin:58px auto 30px}.meeting-list{margin-top:26px;border-bottom:1px solid #ded6ca}.meeting{border-top:1px solid #ded6ca;background:transparent}.meeting summary{cursor:pointer;display:flex;align-items:center;gap:18px;padding:20px 8px;list-style:none}.meeting summary::-webkit-details-marker{display:none}.meeting summary:focus-visible{outline:2px solid #8a7965;outline-offset:3px}.meeting-number{font:14px Arial,sans-serif;color:#9b8a76;min-width:30px}.meeting-title{flex:1;font-size:22px;line-height:1.35}.meeting-plus{font:26px Arial,sans-serif;color:#998b79}.meeting[open] .meeting-plus{transform:rotate(45deg)}.meeting-body{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:0 18px 25px 56px;align-items:start}.meeting-body img{width:100%;max-height:240px;object-fit:contain;background:#f1ede6;border-radius:3px}.meeting-body p{margin:0 0 14px}.meeting-body strong{font-weight:normal;color:#806a52}@media(max-width:650px){.meeting-body{grid-template-columns:1fr;padding:0 10px 22px 10px;gap:10px}.meeting-body img{max-height:210px}.meeting-title{font-size:19px}.meeting summary{gap:10px}}
 
 .clay-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-self:start}.clay-gallery img{width:100%;height:auto;max-height:240px;object-fit:contain;border-radius:12px}@media(max-width:600px){.clay-gallery{grid-template-columns:1fr 1fr}}
+
+/* No oversized or repeated practice images */
+.meeting-body{grid-template-columns:minmax(0,200px) minmax(0,1fr)}
+.meeting-body>img,.clay-gallery img{width:100%;height:auto;max-height:195px;object-fit:contain;background:transparent}
+.clay-gallery{width:100%;grid-template-columns:1fr 1fr;gap:8px}
+.clay-gallery img{max-height:170px}
+.photo-pending{font:13px/1.5 Arial,sans-serif;color:#786f62;background:#f3eee7;padding:14px;border-radius:5px;margin:0}
+@media(max-width:650px){.meeting-body{grid-template-columns:1fr}.meeting-body>img{max-width:260px;max-height:180px}.clay-gallery{max-width:320px}}
