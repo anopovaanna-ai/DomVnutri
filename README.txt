@@ -1,1 +1,1 @@
-Upload index.html and route-6.html to repository root. Upload assets/route6-home-father-daughter-20261031.jpg to assets/. Keep all existing files, especially other route-6 assets. Do not delete files.
+Точечные изменения: index.html — гендерно-инклюзивные названия; route-5.html — фото справа; route-6.html — компактное фото справа. Папка assets содержит необходимые фото. Остальные маршруты не заменять. Фотография третьего маршрута пока не заменена: нужен качественный оригинал.
