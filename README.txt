@@ -1,10 +1,1 @@
-Маяк внутри — черновая четырёхъязычная главная страница
-
-В архиве index.html — обновлённая главная страница с переключателем RU/EN/FR/PT.
-Сохраните оригинал index.html перед заменой.
-ВАЖНО: этот файл ссылается на style.css, assets/ и другие HTML-страницы, которые должны остаться в репозитории.
-Переведены основные элементы главной страницы и названия карточек.
-Не все тексты главной страницы имеют data-ru; они могут остаться русскими.
-Внутренние страницы (route-*.html, groups.html и др.) ещё НЕ переведены.
-Это промежуточная сборка для проверки, не готовый полностью переведённый сайт.
-Для полной локализации потребуются исходные HTML-файлы остальных страниц.
+Replace only index.html in the Dom-vnurti branch root. Do not delete any other files. Test https://mayakvnutri.com/?lang=fr and ?lang=pt. This fixes homepage language switching only; internal pages still require translation.
