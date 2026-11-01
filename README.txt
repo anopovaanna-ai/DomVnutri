@@ -1,1 +1,10 @@
-Update for Lighthouse Inside: replace route-1.html in the root of your existing GitHub repository. Do not delete or replace images, style.css, or other pages. This update translates route 1 into English when EN is selected; Russian remains unchanged.
+Маяк внутри — черновая четырёхъязычная главная страница
+
+В архиве index.html — обновлённая главная страница с переключателем RU/EN/FR/PT.
+Сохраните оригинал index.html перед заменой.
+ВАЖНО: этот файл ссылается на style.css, assets/ и другие HTML-страницы, которые должны остаться в репозитории.
+Переведены основные элементы главной страницы и названия карточек.
+Не все тексты главной страницы имеют data-ru; они могут остаться русскими.
+Внутренние страницы (route-*.html, groups.html и др.) ещё НЕ переведены.
+Это промежуточная сборка для проверки, не готовый полностью переведённый сайт.
+Для полной локализации потребуются исходные HTML-файлы остальных страниц.
