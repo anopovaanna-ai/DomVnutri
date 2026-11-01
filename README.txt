@@ -1,1 +1,1 @@
-Replace only index.html in the Dom-vnurti branch root. Do not delete any other files. Test https://mayakvnutri.com/?lang=fr and ?lang=pt. This fixes homepage language switching only; internal pages still require translation.
+Загрузите четыре HTML-файла в корень ветки Dom-vnurti с заменой одноимённых. Сохранены исходные изображения, стили и тексты. Выбранный язык RU/EN/FR/PT сохраняется при переходах между этими страницами. Другие внутренние страницы необходимо также перевести.

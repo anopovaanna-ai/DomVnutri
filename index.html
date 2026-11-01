@@ -33,10 +33,42 @@
   document.querySelectorAll('[data-ru]').forEach(el=>{const value=el.getAttribute('data-'+lang);if(value!==null)el.textContent=value;});
   document.querySelectorAll('[data-placeholder-ru]').forEach(el=>{const value=el.getAttribute('data-placeholder-'+lang);if(value!==null)el.setAttribute('placeholder',value);});
   document.title=names[lang]+' — '+({ru:'Пространство поддержки',en:'A space for support',fr:'Un espace de soutien',pt:'Um espaço de apoio'}[lang]);
-  select.value=lang;if(label)label.firstChild.textContent=({ru:'Язык / Language ',en:'Language ',fr:'Langue ',pt:'Idioma '}[lang]);localStorage.setItem('mayak-language',lang);
+  select.value=lang;if(label)label.firstChild.textContent=({ru:'Язык / Language ',en:'Language ',fr:'Langue ',pt:'Idioma '}[lang]);localStorage.setItem('mayak-language',lang);localStorage.setItem('li-lang',lang);
  }
  select.addEventListener('change',()=>setLanguage(select.value));
  window.setMayakLanguage=setLanguage;
  const fromUrl=new URLSearchParams(location.search).get('lang');
- setLanguage(['ru','en','fr','pt'].includes(fromUrl)?fromUrl:(localStorage.getItem('mayak-language')||'ru'));
-})();</script></body></html>
+ setLanguage(['ru','en','fr','pt'].includes(fromUrl)?fromUrl:(localStorage.getItem('mayak-language')||localStorage.getItem('li-lang')||'ru'));
+})();</script><script id="mayak-language-navigation-bridge">
+(function(){
+ const allowed=['ru','en','fr','pt'];
+ function language(){
+   const q=new URLSearchParams(location.search).get('lang');
+   if(allowed.includes(q))return q;
+   const doc=document.documentElement.lang.toLowerCase().split('-')[0];
+   if(allowed.includes(doc))return doc;
+   return localStorage.getItem('mayak-language')||localStorage.getItem('li-lang')||'ru';
+ }
+ function sync(){
+   const l=language();
+   if(!allowed.includes(l))return;
+   try{localStorage.setItem('mayak-language',l);localStorage.setItem('li-lang',l);}catch(e){}
+   document.querySelectorAll('a[href]').forEach(a=>{
+     const raw=a.getAttribute('href');
+     if(!raw||raw.startsWith('#')||/^(https?:|mailto:|tel:|javascript:|data:)/i.test(raw))return;
+     try{
+       const url=new URL(raw,location.href);
+       if(url.origin!==location.origin||!url.pathname.endsWith('.html'))return;
+       if(url.pathname.endsWith('/individual.html'))url.pathname=url.pathname.replace(/individual\.html$/,'specialists.html');
+       url.searchParams.set('lang',l);
+       a.setAttribute('href',url.pathname.split('/').pop()+url.search+url.hash);
+     }catch(e){}
+   });
+ }
+ // The homepage uses a select; the other pages use language buttons.
+ document.addEventListener('change',e=>{if(e.target.matches('#language-select'))queueMicrotask(sync)});
+ document.addEventListener('click',e=>{if(e.target.closest('[data-lang-choice],button[onclick*="setSiteLanguage"],button[onclick*="setLang"]'))queueMicrotask(sync)});
+ new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+ sync();
+})();
+</script></body></html>
