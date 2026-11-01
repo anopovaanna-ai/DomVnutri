@@ -1,0 +1,30 @@
+ВОССТАНОВЛЕНИЕ САЙТА «МАЯК ВНУТРИ» — 31 октября 2026
+
+Это отдельная рабочая сборка, не опубликованная на GitHub.
+Подробные страницы маршрутов 4, 5, 6, 10, 11, 13, 14 восстановлены из архивов, действительно сохранённых 31 октября.
+Маршруты 1, 3, 7, 8 взяты из присланных пользователем HTML; для 2, 9, 12 пока остались более ранние варианты.
+Главная страница взята из архива исправления фотографии маршрута 14 от 31 октября.
+Группы и изображения группы — из поздней согласованной сборки от 31 октября.
+В папке _исходные_варианты сохранены альтернативные HTML маршрутов 11 и 14.
+Внимание: не публиковать целиком без проверки ссылок и отсутствующих ресурсов.
+
+НЕДОСТАЮЩИЕ ЛОКАЛЬНЫЕ РЕСУРСЫ ПО СТРАНИЦАМ:
+route-8.html: about.html, assets/photo17.jpeg, assets/photo18.jpeg, assets/photo4.webp, assets/photo7.jpeg, individual.html, materials.html
+route-12.html: about.html, assets/clay.jpeg, assets/fabric.jpeg, assets/space.jpeg, individual.html, materials.html
+group-my-place.html: individual.html, specialists.html
+route-13.html: about.html, assets/photo20.jpeg, individual.html, materials.html
+route-14.html: about.html, individual.html
+route-9.html: about.html, assets/photo1.jpeg, individual.html, materials.html
+route-4.html: about.html, individual.html, specialists.html
+route-2.html: about.html, assets/photo12.jpeg, individual.html, materials.html
+group-women.html: specialists.html
+route-3.html: about.html, assets/photo5.jpeg, assets/practice-my-territory.jpg, assets/practice-small-discoveries.jpg, assets/practice-what-is-mine.jpg, individual.html, materials.html
+groups.html: individual.html, specialists.html
+route-11.html: about.html, individual.html
+resources.html: about.html, book.html, individual.html, materials.html
+route-10.html: about.html, individual.html
+route-5.html: about.html, individual.html
+route-7.html: about.html, assets/collage-concept.jpg, assets/letters-concept.jpg, assets/memory-corner-concept.jpg, assets/ritual.jpeg, book.html, individual.html, materials.html
+index.html: about.html, assets/baby-hand-home-20261031.jpeg, assets/photo15.jpeg, assets/photo20.jpeg, assets/photo5.jpeg, assets/ritual.jpeg, assets/route6-home-father-daughter-20261031.jpg, assets/writing.jpeg, individual.html, materials.html
+route-6.html: about.html, individual.html
+route-1.html: about.html, assets/clay.jpeg, assets/photo15.jpeg, assets/space.jpeg, assets/writing.jpeg, specialists.html
