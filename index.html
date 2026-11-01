@@ -19,26 +19,26 @@ function applyLang(){document.documentElement.lang=lang;const selector=document.
 function setSiteLanguage(value){lang=['ru','en','fr','pt'].includes(value)?value:'ru';localStorage.setItem('li-lang',lang);applyLang()}
 function toggleLang(){setSiteLanguage(lang==='ru'?'en':'ru')}
 function filterTopics(){
- const normalize=s=>(s||'').toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ё/g,'е').trim();
- const groups=[
- ['развод','разводимся','развелась','расставание','разрыв','бывший','бывшая','separation','divorce','breakup','divorcio','divórcio','separação','rupture'],
- ['травма','психотравма','trauma','traumatisme'],
- ['границы','личные границы','отказать','нет','boundaries','limits','limites','fronteiras'],
- ['увольнение','потеря работы','безработица','работа','карьера','job loss','unemployment','licenciement','chomage','emprego','desemprego'],
- ['горе','утрата','смерть близкого','потеря','grief','bereavement','deuil','luto','perda'],
- ['тревога','страх','беспокойство','anxiety','fear','anxiete','anxiété','ansiedade','medo'],
- ['самооценка','неуверенность','self-esteem','confidence','estime de soi','autoestima'],
- ['отношения','конфликт','relationship','relationships','relations','relacionamento','relações'],
- ['ребенок','дети','родительство','child','parenting','enfant','parentalite','criança','parentalidade'],
- ['перемены','переезд','изменения','change','moving','changement','mudança'],
- ['одиночество','одиноко','loneliness','solitude','solidão']
- ];
- const q=normalize(document.querySelector('#search').value);
- const expanded=new Set([q]);
- for(const group of groups){if(group.some(term=>normalize(term).includes(q)||q.includes(normalize(term))))for(const term of group)expanded.add(normalize(term))}
+ const normalize=value=>String(value||'').toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ё/g,'е').replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();
+ const tags={
+ 'route-1.html':'расставание разрыв развод бывший бывшая отношения абьюз абьюзивные отношения токсичные отношения насилие эмоциональное насилие газлайтинг манипуляция измена предательство ревность зависимые отношения созависимость страх одиночества расставаться отпустить партнера breakup divorce separation abusive relationship toxic relationship gaslighting rupture séparation relation toxique violência relacionamento abusivo separação',
+ 'route-7.html':'утрата потеря горе смерть умер близкий траур скорбь печаль тоска горевание похороны потеря ребенка потеря родителя потеря любимого человека пережить смерть grief loss bereavement mourning deuil décès perte luto morte saudade',
+ 'route-3.html':'самооценка низкая самооценка неуверенность в себе самокритика стыд вина чувство вины не люблю себя потеряла себя потерял себя чего хочу желания потребности смысл самоценность идентичность усталость выгорание апатия внутренний критик синдром самозванца self esteem self worth confidence identity burnout estime de soi confiance épuisement autoestima autoconfiança esgotamento',
+ 'route-4.html':'рождение ребенка малыш младенец материнство отцовство родители молодая мама послеродовой период декрет родительское выгорание не высыпаюсь нет времени на себя отношения после рождения ребенка партнерство семья новый ребенок motherhood fatherhood newborn postpartum parenting maternité naissance bébé maternidade nascimento bebé',
+ 'route-5.html':'стареющие родители пожилые родители мама папа уход за родителями болезнь родителей забота о родителях чувство долга вина ответственность деменция старость старение родителей caregiver elderly parents aging parents caring for parents parents âgés vieillissement aidant pais idosos cuidar dos pais envelhecimento',
+ 'route-6.html':'особенный ребенок особенности развития ребенок развивается иначе инвалидность аутизм расстройство аутистического спектра рас зпр задержка развития диагноз ребенка нейроотличие сдвг адаптация принятие диагноза инклюзия особые потребности developmental delay autism neurodiversity special needs disability enfant handicap autisme développement criança deficiência autismo desenvolvimento',
+ 'route-10.html':'личные границы границы не могу сказать нет угождать всем удобная для всех манипуляции давление контроль нарушение границ абьюз абьюзивные отношения токсичные отношения газлайтинг созависимость самооценка неуверенность отстаивать себя страх отказать зависимость от чужого мнения boundaries people pleasing assertiveness abuse gaslighting limites personnelles poser des limites limites pessoais dizer não',
+ 'route-11.html':'потеря работы уволили увольнение безработица сокращение поиск работы карьера собеседование профессиональный кризис смена профессии финансовая тревога деньги потеряла работу потерял работу job loss unemployment redundancy career licenciement chômage emploi desemprego demissão trabalho',
+ 'route-13.html':'переезд эмиграция иммиграция релокация адаптация чужая страна одиночество за границей культурный шок тоска по дому нет друзей язык новая страна миграция relocation immigration moving abroad homesick expatriate expatriation déménagement migration mudança imigração saudade',
+ 'route-14.html':'не знаю куда двигаться дальше смысл жизни потеря смысла неопределенность выбор перемены кризис жизненный кризис будущее поиск себя не знаю чего хочу новые возможности решение страх перемен растерянность тупик предназначение направление цель uncertainty direction purpose life transition choices avenir sens de la vie incertitude futuro propósito incerteza'
+ };
+ const q=normalize(document.querySelector('#search')?.value);
+ const words=q.split(' ').filter(Boolean);
  document.querySelectorAll('.topic').forEach(card=>{
-  const haystack=normalize([card.textContent,card.dataset.ru,card.dataset.en,card.dataset.fr,card.dataset.pt,card.getAttribute('href'),card.querySelector('img')?.alt].join(' '));
-  const matched=!q||[...expanded].some(term=>term&&haystack.includes(term));
-  card.classList.toggle('hidden',!matched);
+  const href=(card.getAttribute('href')||'').split('?')[0];
+  const corpus=normalize([tags[href]||'',card.dataset.ru,card.dataset.en,card.dataset.fr,card.dataset.pt,card.querySelector('img')?.alt].join(' '));
+  const matches=!q||corpus.includes(q)||(words.length>1&&words.every(w=>corpus.includes(w)));
+  card.classList.toggle('hidden',!matches);
  });
-}applyLang();</script></body></html>
+}
+applyLang();</script></body></html>
