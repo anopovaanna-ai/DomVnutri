@@ -1,1 +1,1 @@
-Точечные изменения: index.html — гендерно-инклюзивные названия; route-5.html — фото справа; route-6.html — компактное фото справа. Папка assets содержит необходимые фото. Остальные маршруты не заменять. Фотография третьего маршрута пока не заменена: нужен качественный оригинал.
+Update for Lighthouse Inside: replace route-1.html in the root of your existing GitHub repository. Do not delete or replace images, style.css, or other pages. This update translates route 1 into English when EN is selected; Russian remains unchanged.
