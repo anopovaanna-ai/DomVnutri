@@ -39,7 +39,22 @@ body #practices>.practice>.practice-content{grid-column:2!important;grid-row:1!i
 body #practices>.practice>.practice-content p,body #practices>.practice>.practice-content li{text-align:justify!important;hyphens:auto!important;overflow-wrap:break-word!important}
 @media(max-width:650px){body #practices>.practice{display:flex!important;flex-direction:column!important;gap:14px!important;padding:16px!important}body #practices>.practice>.practice-image{width:100%!important;max-width:290px!important;max-height:210px!important;align-self:center!important}body #practices>.practice>.practice-content{width:100%!important}}
 `;document.head.append(route14Style);}
-const hero=document.querySelector('.route-hero,.hero-boundaries,.route6-hero,.route-hero-loss');const oldTabs=document.querySelector('.tabs');if(hero&&hero.parentNode){hero.insertAdjacentElement('afterend',guide)}else if(oldTabs&&oldTabs.parentNode){oldTabs.insertAdjacentElement('afterend',guide)}else if(title&&root.contains(title)){title.insertAdjacentElement('afterend',guide)}else root.prepend(guide);if(oldTabs){oldTabs.style.display='none';oldTabs.setAttribute('aria-hidden','true')}
+const hero=document.querySelector('.route-hero,.hero-boundaries,.route6-hero,.route-hero-loss');/* Consistent accessible practice disclosures without changing authored instructions. */
+document.querySelectorAll('details').forEach((details,i)=>{
+const summary=details.querySelector(':scope > summary');if(!summary)return;
+summary.setAttribute('role','button');
+summary.setAttribute('aria-expanded',String(details.open));
+if(!summary.hasAttribute('tabindex'))summary.setAttribute('tabindex','0');
+details.addEventListener('toggle',()=>summary.setAttribute('aria-expanded',String(details.open)));
+});
+const disclosureStyle=document.createElement('style');disclosureStyle.id='sv-practice-disclosures-consistent';disclosureStyle.textContent=`
+body details>summary{display:list-item;cursor:pointer;padding:11px 14px;border:1px solid #d9cdbb;border-radius:10px;background:#f7f3ec;color:#423b32;font-weight:600;line-height:1.5;max-width:100%;box-sizing:border-box}
+body details>summary:hover{background:#eee7dd}
+body details>summary:focus-visible{outline:3px solid #9e8d75;outline-offset:3px}
+body details[open]>summary{margin-bottom:14px;background:#ece5d9}
+body details[open]{overflow:visible}
+`;document.head.append(disclosureStyle);
+const oldTabs=document.querySelector('.tabs');if(hero&&hero.parentNode){hero.insertAdjacentElement('afterend',guide)}else if(oldTabs&&oldTabs.parentNode){oldTabs.insertAdjacentElement('afterend',guide)}else if(title&&root.contains(title)){title.insertAdjacentElement('afterend',guide)}else root.prepend(guide);if(oldTabs){oldTabs.style.display='none';oldTabs.setAttribute('aria-hidden','true')}
 let current='understand';const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function language(){let l=(document.documentElement.lang||localStorage.getItem('li-lang')||'ru').slice(0,2);return words[l]?l:'ru'}
 function render(){let t=words[language()];guide.querySelector('.sv-guide-title').textContent=t.heading;const labels=[t.understand,t.practice,t.support];const route=location.pathname.split('/').pop()||'route-10.html';const outcome=(routeOutcomes[route]||routeOutcomes['route-10.html'])[language()];guide.querySelectorAll('[data-tab]').forEach((b,i)=>{b.textContent=labels[i];b.setAttribute('aria-selected',String(b.dataset.tab===current))});let panel=guide.querySelector('.sv-guide-panel');
