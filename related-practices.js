@@ -1,0 +1,18 @@
+/* Shared contextual links to existing Svetlee practices. */
+(function(){
+const map={
+'route-7.html':['support','discoveries'],
+'route-10.html':['space','support'],
+'route-3.html':['space','discoveries'],
+'route-4.html':['support','space'],
+'route-5.html':['support','discoveries'],
+'route-6.html':['art','support'],
+'route-1.html':['art','space'],
+'route-13.html':['discoveries','art'],
+'route-11.html':['space','discoveries'],
+'route-14.html':['art','discoveries']
+};
+const names={ru:{art:'Когда чувства сложно выразить словами',discoveries:'Коллекция маленьких открытий',space:'Моё пространство',support:'Когда хочется на ручки',title:'Практики, которые могут быть рядом',desc:'Если хочется продолжить исследование в своём темпе, можно выбрать одну из этих практик.',all:'Все материалы и практики'},en:{art:'When feelings are hard to put into words',discoveries:'A collection of small discoveries',space:'My space',support:'When you need care',title:'Practices you may find helpful',desc:'If you wish, explore one of these practices at your own pace.',all:'All resources and practices'},fr:{art:'Quand les mots ne suffisent pas',discoveries:'Collection de petites découvertes',space:'Mon espace',support:'Quand on a besoin de douceur',title:'Des pratiques pour vous accompagner',desc:'Si vous le souhaitez, découvrez une pratique à votre rythme.',all:'Toutes les ressources et pratiques'},pt:{art:'Quando faltam palavras',discoveries:'Coleção de pequenas descobertas',space:'Meu espaço',support:'Quando precisamos de acolhimento',title:'Práticas que podem ajudar',desc:'Se desejar, experimente uma prática no seu ritmo.',all:'Todos os materiais e práticas'}};
+function init(){const page=location.pathname.split('/').pop(),keys=map[page];if(!keys||document.getElementById('sv-related-practices'))return;const style=document.createElement('style');style.textContent='#sv-related-practices{max-width:1000px;margin:36px auto;padding:26px 24px;background:#f7f1e9;border:1px solid #e2d6c9;border-radius:15px;color:#51473e;box-sizing:border-box}#sv-related-practices h2{font:normal clamp(23px,3vw,30px) Georgia,serif;margin:0 0 12px}#sv-related-practices p{line-height:1.65;margin:0 0 18px}#sv-related-practices .sv-related-links{display:flex;flex-wrap:wrap;gap:11px}#sv-related-practices a{display:inline-block;border:1px solid #c9b9a5;border-radius:24px;padding:10px 17px;color:#51473e;text-decoration:none;background:#fffcf7}';document.head.append(style);const section=document.createElement('section');section.id='sv-related-practices';const heading=document.createElement('h2'),desc=document.createElement('p'),links=document.createElement('div');links.className='sv-related-links';section.append(heading,desc,links);const anchor=document.querySelector('.mayak-global-contact,footer,#contacts');if(anchor)anchor.before(section);else document.body.append(section);function render(){let lang=document.documentElement.lang.split('-')[0];if(!names[lang]){try{lang=localStorage.getItem('li-lang')||'ru'}catch(e){lang='ru'}}const t=names[lang]||names.ru;heading.textContent=t.title;desc.textContent=t.desc;links.replaceChildren();for(const key of keys){const a=document.createElement('a');a.href='materials.html#'+key;a.textContent=t[key];links.append(a)}const all=document.createElement('a');all.href='resources.html#practice-library';all.textContent=t.all;links.append(all)}render();new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});document.addEventListener('click',e=>{if(e.target.closest('[data-lang-choice],#site-language,.lang button'))setTimeout(render,0)});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
