@@ -15,7 +15,7 @@ form.addEventListener('submit',async function(e){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(data)
     });
-    if(!response.ok)throw new Error('Submission failed: '+response.status);
+    if(!response.ok){let detail='';try{const info=await response.json();detail=info.error||info.message||''}catch(e){}throw new Error('HTTP '+response.status+(detail?' — '+detail:''));}
     const json=await response.json();
     if(json.success!==true)throw new Error('Submission not confirmed');
     form.reset();
@@ -24,7 +24,7 @@ form.addEventListener('submit',async function(e){
   }catch(error){
     console.error('Application submission error',error);
     result.style.color='#a13b35';
-    result.textContent='Не удалось отправить анкету. Проверьте соединение и попробуйте ещё раз. Ваши ответы сохранены в форме.';
+    result.textContent='Не удалось отправить анкету ('+(error.message||'ошибка сети')+'). Ответы остаются в форме, пока страница открыта.';
   }finally{
     button.disabled=false;
     button.textContent='Отправить анкету';
