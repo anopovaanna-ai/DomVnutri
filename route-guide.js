@@ -76,6 +76,9 @@ const roadStyle=document.createElement('style');roadStyle.id='sv-road-to-lightho
 .sv-route-guide .sv-road-lighthouse{position:absolute!important;right:0!important;top:0!important;opacity:1!important;transform:none!important;width:84px!important;height:126px!important;pointer-events:none!important;z-index:2!important}
 .sv-route-guide .sv-road-lighthouse svg{width:84px!important;height:126px!important}
 }
+
+.sv-guide-always-links{margin-top:20px!important;padding-top:16px;border-top:1px solid #e1d8c9}
+.sv-guide-always-links a{background:#fffaf5!important;color:#51473e!important;border:1px solid #c8b8a4!important}
 `;document.head.append(roadStyle);const hero=document.querySelector('.route-hero,.hero-boundaries,.route6-hero,.route-hero-loss');/* Consistent accessible practice disclosures without changing authored instructions. */
 document.querySelectorAll('details').forEach((details,i)=>{
 const summary=details.querySelector(':scope > summary');if(!summary)return;
@@ -98,8 +101,24 @@ function render(){let t=words[language()];guide.querySelector('.sv-guide-title')
 if(current==='understand'){panel.innerHTML='<h3>'+esc(language()==='ru'?'Что вы сможете здесь исследовать':language()==='fr'?'Ce que vous pourrez explorer':language()==='pt'?'O que poderá explorar':'What you can explore here')+'</h3><ol>'+outcome.map(a=>'<li>'+esc(a)+'</li>').join('')+'</ol>'}
 if(current==='listen'){panel.innerHTML='<h3>'+esc(t.steps[1][0].replace(/^2\\. /,''))+'</h3><p>'+esc(t.steps[1][1])+'</p><p>'+esc(outcome[0])+'</p>'}if(current==='practice'){panel.innerHTML='<h3>'+esc(t.practiceLead)+'</h3><p>'+esc(outcome[1])+'</p><p>'+esc(t.practiceText)+'</p><div class="sv-guide-actions"><a href="#sv-practices-target">'+esc(t.practice)+'</a></div>'}
 if(current==='support'){const groupPath=routeGroups[route]||'groups.html';const groupTitle=(groupNames[language()]||groupNames.ru)[groupPath]||t.groups;const groupLabel=language()==='ru'?'Подходящая группа: ':language()==='fr'?'Groupe proposé : ':language()==='pt'?'Grupo sugerido: ':'Suggested group: ';const otherLabel=language()==='ru'?'Посмотреть другие группы':language()==='fr'?'Voir les autres groupes':language()==='pt'?'Ver outros grupos':'Explore other groups';panel.innerHTML='<h3>'+esc(t.supportLead)+'</h3><p>'+esc(outcome[2])+'</p><p>'+esc(t.supportText)+'</p><div class="sv-guide-actions"><a href="'+groupPath+'?lang='+language()+'">'+esc(groupLabel+groupTitle)+'</a><a href="specialists.html?lang='+language()+'">'+esc(t.individual)+'</a><a href="groups.html?lang='+language()+'">'+esc(otherLabel)+'</a><a href="conversation.html?lang='+language()+'">'+esc(t.conversation)+'</a></div>'}
+
+/* Offer the same four support destinations at every stage, not only the final tab. */
+const lang=language(),groupPath=routeGroups[route]||'groups.html';
+const navLabels={
+ru:['Выбрать специалиста','Группы и встречи','Поговорить с Маяком','Поговорить с людьми'],
+en:['Find a specialist','Groups and meetings','Talk to the lighthouse','Talk to people'],
+fr:['Choisir un spécialiste','Groupes et rencontres','Parler au phare','Parler avec des personnes'],
+pt:['Escolher especialista','Grupos e encontros','Conversar com o farol','Conversar com pessoas']
+};
+const navUrls=['specialists.html','groups.html','conversation.html','conversation.html'];
+const nav=navLabels[lang]||navLabels.ru;
+const navWrap=document.createElement('div');navWrap.className='sv-guide-always-links sv-guide-actions';
+nav.forEach((label,i)=>{const a=document.createElement('a');a.href=navUrls[i]+'?lang='+lang;a.textContent=label;navWrap.appendChild(a)});
+if(current==='support'){const existing=[...panel.querySelectorAll('a[href]')];navWrap.querySelectorAll('a').forEach(a=>{if(existing.some(x=>x.getAttribute('href')===a.getAttribute('href')))a.remove()})}
+if(navWrap.children.length)panel.appendChild(navWrap);
+
 }
-guide.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.tab;render();if(current==='practice'){const target=document.getElementById('sv-practices-target')||document.getElementById('route-practices')||document.getElementById('practices');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}if(current==='support'){const target=document.querySelector('.mayak-global-support,.route-support,.r4-support,#route-individual,#individual,#support');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}}));
+guide.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.tab;render();}));
 if(practice){practice.id=practice.id||'sv-practices-target';if(practice.id!=='sv-practices-target'){const anchor=document.createElement('span');anchor.id='sv-practices-target';practice.before(anchor)}}else{const anchor=document.createElement('span');anchor.id='sv-practices-target';(root.querySelector('#practices,#route-practices,.practice,.route3-card')||root).prepend(anchor)}
 /* Contextual group links in route content, leaving global navigation untouched. */
 const routeFile=location.pathname.split('/').pop();const groupFile=routeGroups[routeFile];if(groupFile){document.querySelectorAll('main a[href],.route-content a[href],.route-body a[href],.mayak-global-support a[href]').forEach(a=>{const raw=a.getAttribute('href');if(!raw||!/^groups\.html(?:[?#]|$)/.test(raw))return;const inSupport=a.closest('.mayak-global-support,.route-support,.r4-support,#route-individual,#support,.mayak-global-contact,.route-content,.route-body,main');if(!inSupport)return;a.setAttribute('href',groupFile+'?lang='+language());a.setAttribute('data-sv-contextual-group','true');});}
