@@ -75,27 +75,27 @@ const select=document.getElementById('lang');try{const q=new URLSearchParams(loc
 (function(){
 const content={
 ru:[
-['Понять, что происходит','Начните с жизненной ситуации, которая сейчас ближе всего.',['Выбрать свою ситуацию','#choices']],
-['Прислушаться к себе','Можно начать с разговора или бережного исследования своих чувств.',['Поговорить с Маяком','conversation.html'],['Посмотреть жизненные ситуации','#choices']],
-['Попробовать практику','Выберите практику по тому, что вы сейчас проживаете.',['Открыть материалы и практики','practice-library.html'],['Выбрать ситуацию для практики','#choices']],
+['Понять, что происходит','Начните с жизненной ситуации, которая сейчас ближе всего.',['Выбрать свою ситуацию','#choices'],['Выбрать специалиста','specialists.html']],
+['Прислушаться к себе','Можно начать с разговора или бережного исследования своих чувств.',['Поговорить с Маяком','conversation.html'],['Посмотреть жизненные ситуации','#choices'],['Выбрать специалиста','specialists.html']],
+['Попробовать практику','Выберите практику по тому, что вы сейчас проживаете.',['Открыть материалы и практики','practice-library.html'],['Выбрать ситуацию для практики','#choices'],['Выбрать специалиста','specialists.html']],
 ['Найти поддержку','Выберите тот формат поддержки, который вам сейчас подходит.',['Выбрать специалиста','specialists.html'],['Группы и встречи','groups.html'],['Поговорить с Маяком','conversation.html'],['Поговорить с людьми','conversation.html']]
 ],
 en:[
-['Understand what is happening','Start with the life situation that feels closest to yours.',['Choose your situation','#choices']],
-['Listen to yourself','You can begin with a conversation or gentle reflection.',['Talk to the lighthouse','conversation.html'],['Explore situations','#choices']],
-['Try a practice','Find a practice that relates to what you are experiencing.',['Browse practices','practice-library.html'],['Choose a situation','#choices']],
+['Understand what is happening','Start with the life situation that feels closest to yours.',['Choose your situation','#choices'],['Find a specialist','specialists.html']],
+['Listen to yourself','You can begin with a conversation or gentle reflection.',['Talk to the lighthouse','conversation.html'],['Explore situations','#choices'],['Find a specialist','specialists.html']],
+['Try a practice','Find a practice that relates to what you are experiencing.',['Browse practices','practice-library.html'],['Choose a situation','#choices'],['Find a specialist','specialists.html']],
 ['Find support','Choose the kind of support that feels right for you.',['Find a specialist','specialists.html'],['Groups and meetings','groups.html'],['Talk to the lighthouse','conversation.html'],['Talk to people','conversation.html']]
 ],
 fr:[
-['Comprendre ce qui se passe','Commencez par la situation qui vous correspond.',['Choisir une situation','#choices']],
-['S’écouter','Vous pouvez commencer par une conversation ou une réflexion.',['Parler au phare','conversation.html'],['Voir les situations','#choices']],
-['Essayer une pratique','Trouvez une pratique adaptée à votre vécu.',['Voir les pratiques','practice-library.html'],['Choisir une situation','#choices']],
+['Comprendre ce qui se passe','Commencez par la situation qui vous correspond.',['Choisir une situation','#choices'],['Choisir un spécialiste','specialists.html']],
+['S’écouter','Vous pouvez commencer par une conversation ou une réflexion.',['Parler au phare','conversation.html'],['Voir les situations','#choices'],['Choisir un spécialiste','specialists.html']],
+['Essayer une pratique','Trouvez une pratique adaptée à votre vécu.',['Voir les pratiques','practice-library.html'],['Choisir une situation','#choices'],['Choisir un spécialiste','specialists.html']],
 ['Trouver du soutien','Choisissez la forme de soutien qui vous convient.',['Choisir un spécialiste','specialists.html'],['Groupes et rencontres','groups.html'],['Parler au phare','conversation.html'],['Parler aux autres','conversation.html']]
 ],
 pt:[
-['Compreender o que acontece','Comece pela situação que mais se aproxima da sua.',['Escolher uma situação','#choices']],
-['Escutar-se','Pode começar por uma conversa ou reflexão.',['Conversar no farol','conversation.html'],['Ver situações','#choices']],
-['Experimentar uma prática','Encontre uma prática adequada ao que está a viver.',['Ver práticas','practice-library.html'],['Escolher uma situação','#choices']],
+['Compreender o que acontece','Comece pela situação que mais se aproxima da sua.',['Escolher uma situação','#choices'],['Escolher especialista','specialists.html']],
+['Escutar-se','Pode começar por uma conversa ou reflexão.',['Conversar no farol','conversation.html'],['Ver situações','#choices'],['Escolher especialista','specialists.html']],
+['Experimentar uma prática','Encontre uma prática adequada ao que está a viver.',['Ver práticas','practice-library.html'],['Escolher uma situação','#choices'],['Escolher especialista','specialists.html']],
 ['Encontrar apoio','Escolha a forma de apoio mais adequada para si.',['Escolher especialista','specialists.html'],['Grupos e encontros','groups.html'],['Conversar no farol','conversation.html'],['Conversar com pessoas','conversation.html']]
 ]};
 const buttons=[...document.querySelectorAll('.route-road .route-stop')],panel=document.getElementById('start-step-panel');
