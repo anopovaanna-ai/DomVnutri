@@ -79,7 +79,29 @@ const roadStyle=document.createElement('style');roadStyle.id='sv-road-to-lightho
 
 .sv-guide-always-links{margin-top:20px!important;padding-top:16px;border-top:1px solid #e1d8c9}
 .sv-guide-always-links a{background:#fffaf5!important;color:#51473e!important;border:1px solid #c8b8a4!important}
-`;document.head.append(roadStyle);const hero=document.querySelector('.route-hero,.hero-boundaries,.route6-hero,.route-hero-loss');/* Consistent accessible practice disclosures without changing authored instructions. */
+`;document.head.append(roadStyle);/* Consistent visible four-language selector across route pages. */
+(function(){
+const header=document.querySelector('header');if(!header)return;
+const native=header.querySelector('#sv-route-lang,#site-language');
+const oldToggle=header.querySelector('button.lang');
+if(native)native.style.display='none';
+if(oldToggle)oldToggle.style.display='none';
+const picker=document.createElement('select');picker.id='sv-unified-route-language';picker.setAttribute('aria-label','Язык / Language / Langue / Idioma');
+[['ru','Русский'],['en','English'],['fr','Français'],['pt','Português']].forEach(([code,name])=>{const opt=document.createElement('option');opt.value=code;opt.textContent=name;picker.appendChild(opt)});
+picker.style.cssText='display:inline-block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:1000!important;max-width:130px!important;padding:9px 8px!important;border:1px solid #b8b3a6!important;border-radius:20px!important;background:#faf7f2!important;color:#24231f!important;font:13px Arial,sans-serif!important;flex-shrink:0!important';
+header.insertBefore(picker,header.querySelector('.specialist-header-cta')||null);
+let initial=new URLSearchParams(location.search).get('lang')||localStorage.getItem('li-lang')||document.documentElement.lang||'ru';if(!['ru','en','fr','pt'].includes(initial))initial='ru';
+function setLanguage(value,initializing){
+document.documentElement.lang=value;localStorage.setItem('li-lang',value);picker.value=value;
+if(native){native.value=value;if(!initializing&&typeof window.setRouteLang==='function'&&native.id==='sv-route-lang'){try{window.setRouteLang(value)}catch(e){}}else if(!initializing&&typeof window.setSiteLanguage==='function'&&native.id==='site-language'){try{window.setSiteLanguage(value)}catch(e){}}}
+if(oldToggle&&typeof window.toggleLang==='function'&&(value==='ru'||value==='en')){let before=document.documentElement.lang;if(!initializing&&typeof lang!=='undefined'&&lang!==value){try{window.toggleLang()}catch(e){}}}
+document.querySelectorAll('[data-ru]').forEach(el=>{const translated=el.getAttribute('data-'+value);if(translated!==null&&el.children.length===0)el.textContent=translated;else if(translated!==null&&el.tagName==='A'&&el.children.length===0)el.textContent=translated});
+document.querySelectorAll('[data-placeholder-ru]').forEach(el=>{const t=el.getAttribute('data-placeholder-'+value);if(t!==null)el.placeholder=t});
+}
+picker.addEventListener('change',()=>setLanguage(picker.value,false));
+setLanguage(initial,true);
+})();
+const hero=document.querySelector('.route-hero,.hero-boundaries,.route6-hero,.route-hero-loss');/* Consistent accessible practice disclosures without changing authored instructions. */
 document.querySelectorAll('details').forEach((details,i)=>{
 const summary=details.querySelector(':scope > summary');if(!summary)return;
 summary.setAttribute('role','button');
