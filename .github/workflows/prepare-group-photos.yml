@@ -39,5 +39,7 @@ jobs:
           git add group-images/approved-20261114
           if ! git diff --cached --quiet; then
             git commit -m "Prepare selected original group photos for web"
-            git push
+            git fetch origin Dom-vnurti
+            git rebase origin/Dom-vnurti
+            git push origin HEAD:Dom-vnurti
           fi
