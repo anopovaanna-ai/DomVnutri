@@ -1,0 +1,43 @@
+name: Prepare approved group photographs
+on:
+  push:
+    branches: [Dom-vnurti]
+    paths:
+      - '.github/workflows/prepare-group-photos.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install HEIC converter
+        run: python -m pip install --quiet pillow pillow-heif
+      - name: Convert original photographs without stretching
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          from pillow_heif import register_heif_opener
+          register_heif_opener()
+          names = ['IMG_2925','IMG_2927','IMG_2930','IMG_2931','IMG_2937','IMG_2942','IMG_2949','IMG_2950','IMG_2755','IMG_0899','IMG_0903','IMG_5891','IMG_5895','IMG_5878']
+          out = Path('group-images/approved-20261114')
+          out.mkdir(parents=True,exist_ok=True)
+          for name in names:
+              matches=[p for p in Path('.').iterdir() if p.is_file() and p.stem.lower()==name.lower() and p.suffix.lower() in ('.heic','.heif')]
+              if not matches: continue
+              with Image.open(matches[0]) as im:
+                  im=ImageOps.exif_transpose(im).convert('RGB')
+                  im.thumbnail((1600,1600),Image.Resampling.LANCZOS)
+                  im.save(out/(name+'.jpg'),quality=86,optimize=True)
+          PY
+      - name: Commit converted photos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add group-images/approved-20261114
+          if ! git diff --cached --quiet; then
+            git commit -m "Prepare selected original group photos for web"
+            git push
+          fi
